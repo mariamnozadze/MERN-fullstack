@@ -71,12 +71,16 @@ router.post(
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
 
-    // Take string into an array
+    // Take string into an array for SKILLS
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
 
-    console.log(profileFields.skills);
+    // Build social object
+    profileFields.social={};
+    if(youtube) profileFields.social.youtube = youtube;
+
+    console.log(profileFields.social.twitter);
 
     res.send('Wazaaap')
   }
