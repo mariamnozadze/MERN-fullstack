@@ -76,7 +76,7 @@ router.post(
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
 
-    console.log(skills);
+    console.log(profileFields.skills);
 
     res.send('Wazaaap')
   }
