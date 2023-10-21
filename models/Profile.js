@@ -1,36 +1,65 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const ProfileSchema= new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
-    },
-    handle: {
+const ProfileSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
+  handle: {
+    type: String,
+    required: true,
+    max: 40,
+  },
+  company: {
+    type: String,
+  },
+  website: {
+    type: String,
+  },
+  location: {
+    type: String,
+  },
+  status: {
+    type: String,
+    required: true,
+  },
+  skills: {
+    type: [String],
+    required: true,
+  },
+  bio: {
+    type: String,
+  },
+  githubusername: {
+    type: String,
+  },
+  experience: [
+    {
+      title: {
         type: String,
         required: true,
-        max: 40
       },
       company: {
-        type: String
-      },
-      website: {
-        type: String
+        type: String,
+        required: true,
       },
       location: {
-        type: String
-      },
-      status: {
         type: String,
-        required: true
       },
-      skills: {
-        type: [String],
-        required: true
+      from: {
+        type: Date,
+        required: true,
       },
-      bio: {
-        type: String
+      to: {
+        type: Date,
       },
-      githubusername: {
-        type: String
+      current: {
+        type: Boolean,
+        default: false,
       },
-})
+      description: {
+        type: String,
+      },
+    },
+  ],
+});
