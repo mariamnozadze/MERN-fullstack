@@ -115,4 +115,5 @@ const ProfileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = ProfileSchema;
+// eslint-disable-next-line no-undef
+module.exports = Profile = mongoose.model("profile", ProfileSchema);
