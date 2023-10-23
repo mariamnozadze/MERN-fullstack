@@ -4,7 +4,7 @@ const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
 const Profile = require("../../models/Profile");
-const User = require("../../models/User");
+// const User = require("../../models/User");
 
 // @route     GET api/profile/me
 // @desc      Get current users profile
@@ -47,6 +47,7 @@ router.post(
     }
 
     const {
+      handle,
       company,
       website,
       location,
@@ -64,6 +65,7 @@ router.post(
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
+    if (handle) profileFields.handle = handle;
     if (company) profileFields.company = company;
     if (website) profileFields.website = website;
     if (location) profileFields.location = location;
@@ -77,18 +79,36 @@ router.post(
     }
 
     // Build SOCIALS object
-    profileFields.social={};
-    if(youtube) profileFields.social.youtube = youtube;
-    if(twitter) profileFields.social.twitter = twitter;
-    if(facebook) profileFields.social.facebook = facebook;
-    if(linkedin) profileFields.social.linkedin = linkedin;
-    if(instagram) profileFields.social.instagram = instagram;
+    profileFields.social = {};
+    if (youtube) profileFields.social.youtube = youtube;
+    if (twitter) profileFields.social.twitter = twitter;
+    if (facebook) profileFields.social.facebook = facebook;
+    if (linkedin) profileFields.social.linkedin = linkedin;
+    if (instagram) profileFields.social.instagram = instagram;
 
+    try {
+      let profile = await Profile.findOne({ user: req.user.id });
 
+      if (profile) {
+        // if profile is found --> Update
+        profile = await Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        );
 
-    console.log(profileFields.social.twitter);
+        return res.json(profile);
+      }
 
-    res.send('Wazaaap')
+      // Create
+      profile = new Profile(profileFields);
+
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
   }
 );
 
