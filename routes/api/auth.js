@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const config = require("config");
+const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
+const jwt = require("jsonwebtoken");
 
 const User = require('../../models/User')
 
@@ -26,12 +28,11 @@ router.get("/", auth, async (req, res) => {
 router.post(
     "/",
     [
-      check("name", "Name is required").not().isEmpty(),
       check("email", "Please include a valid email").isEmail(),
       check(
         "password",
-        "Please enter a password with 8 or more characters"
-      ).isLength({ min: 8 }),
+        "Password is required"
+      ).exists(),
     ],
     async (req, res) => {
       const errors = validationResult(req);
@@ -40,41 +41,19 @@ router.post(
       }
   
       // Destructuring
-      const { name, email, password } = req.body;
+      const { email, password } = req.body;
   
       try {
         // See if the user exists
         let user = await User.findOne({ email });
+
         if (user) {
           return res
             .status(400)
-            .json({ errors: [{ msg: "User already exists" }] });
+            .json({ errors: [{ msg: "invalid credentials" }] });
         }
-  
-        // Get users gravatar
-        const avatar = gravatar.url(email, {
-          s: "200",
-          r: "pg",
-          d: "mm",
-        });
-  
-        //this not saves it to db, creates only an instance
-        user = new User({
-          name,
-          email,
-          avatar,
-          password,
-        });
-  
-        // Encrypt passwords
-  
-        // Generate a cryptographic salt using bcrypt.
-        const salt = await bcrypt.genSalt(10);
-  
-        //Hash the user's password using bcrypt with the generated salt.
-        user.password = await bcrypt.hash(password, salt);
-  
-        await user.save();
+
+        
   
         // Return jsonwebtoken
         const payload = {
