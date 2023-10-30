@@ -4,7 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
 
-const EditProfile = ({ profile: {profile, loading}, createProfile, getCurrentProfile,  history }) => {
+const EditProfile = ({
+  profile: { profile, loading },
+  createProfile,
+  getCurrentProfile,
+  history,
+}) => {
   const [formData, setFormData] = useState({
     company: "",
     website: "",
@@ -22,11 +27,25 @@ const EditProfile = ({ profile: {profile, loading}, createProfile, getCurrentPro
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
-  useEffect(( )=> {
+  useEffect(() => {
     getCurrentProfile();
 
-    
-  })
+    setFormData({
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      status: loading || !profile.status ? "" : profile.status,
+      skills: loading || !skills.company ? "" : skills.company,
+      githubusername:
+        loading || !githubusername.company ? "" : githubusername.company,
+      bio: loading || !bio.company ? "" : bio.company,
+      twitter: loading || !twitter.company ? "" : twitter.company,
+      facebook: loading || !facebook.company ? "" : facebook.company,
+      linkedin: loading || !linkedin.company ? "" : linkedin.company,
+      youtube: loading || !youtube.company ? "" : youtube.company,
+      instagram: loading || !instagram.company ? "" : instagram.company,
+    });
+  }, [loading]);
 
   const {
     company,
