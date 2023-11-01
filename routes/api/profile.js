@@ -223,4 +223,15 @@ router.put(
   }
 );
 
+// @route     DELETE api/profile/experience/exp_id
+// @desc      Delete experience from profile
+// @access    Private
+router.delete("/experience/:exp_id", auth, async (req, res) => {
+  try {
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
