@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://mariamnozadze97:Mernapp1@Cluster0.whvf86j.mongodb.net/?retryWrites=true&w=majority",
-    "jwtSecret": "mytokenissecret"
+    "jwtSecret": "mytokenissecret",
+    "githubClientId": "1c842a19652507550a9c",
+    "githubSecret": "898866234bc2b3638c161910171558bda1e2de34"
 }
