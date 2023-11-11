@@ -67,7 +67,7 @@ router.get("/:id", auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
 
-    // the case where the provided ID is not a valid ObjectID 
+    // the case where the provided ID is not a valid ObjectID
     if (err.kind === "ObjectID") {
       return res.status(404).json({ msg: "Post not found" });
     }
@@ -76,6 +76,44 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+// @route     Delete api/posts:id
+// @desc      Delete a post
+// @access    Private
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
 
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+
+    // Check user
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    // // Ensure that the post object is valid before calling remove()
+    // if (!post.remove) {
+    //   return res.status(500).json({ msg: "Unable to remove post" });
+    // }
+
+    // await post.remove() --> not in use
+
+    // Use deleteOne method directly on the Post model
+    await Post.deleteOne({ _id: req.params.id });
+
+    res.json({ msg: "Post removed" });
+  } catch (err) {
+    console.error(err.message);
+
+    if (err.kind === "ObjectID") {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+
+    res.status(500).send("Server Error");
+  }
+});
+
+module.exports = router;
 
 module.exports = router;
