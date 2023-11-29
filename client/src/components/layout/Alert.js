@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+// Connecting the component to the Redux store
 import { connect } from "react-redux";
 
 const Alert = ({ alerts }) =>
@@ -9,10 +11,12 @@ const Alert = ({ alerts }) =>
     </div>
   ));
 
+// Prop types validation for the alerts prop
 Alert.propTypes = {
   alerts: PropTypes.array.isRequired,
 };
 
+// Mapping state from the Redux store to component props
 const mapStateToProps = (state) => ({
   alerts: state.alert,
 });
