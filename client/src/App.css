@@ -235,22 +235,22 @@ img {
 }
 
 /* Forms */
-.form .form-group {
+form .form-group {
   margin: 1.2rem 0;
 }
 
-.form .form-text {
+form .form-text {
   display: block;
   margin-top: 0.3rem;
   color: #888;
 }
 
-.form input[type='text'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
-.form select,
-.form textarea {
+form input[type='text'],
+form input[type='email'],
+form input[type='password'],
+form input[type='date'],
+form select,
+form textarea {
   display: block;
   width: 100%;
   padding: 0.4rem;
@@ -258,33 +258,33 @@ img {
   border: 1px solid #ccc;
 }
 
-.form input[type='submit'],
+form input[type='submit'],
 button {
   font: inherit;
 }
-
-.form .social-input {
+/* 
+form .social-input {
   display: flex;
-}
+} */
 
-.form .social-input i {
+form .form-group .social-input i {
   padding: 0.5rem;
   width: 4rem;
 }
 
-.form .social-input i.fa-twitter {
+.fa-twitter {
   color: #38a1f3;
 }
-.form .social-input i.fa-facebook {
+.fa-facebook {
   color: #3b5998;
 }
-.form .social-input i.fa-instagram {
-  color: #3f729b;
+.fa-instagram {
+  color:  #910f43;
 }
-.form .social-input i.fa-youtube {
+.fa-youtube {
   color: #c4302b;
 }
-.form .social-input i.fa-linkedin {
+.fa-linkedin {
   color: #0077b5;
 }
 
