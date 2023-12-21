@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"; //withRouter
 import { connect } from "react-redux";
 import { addExperience } from "../../actions/profile";
 
-const AddExperience = (props) => {
+const AddExperience = ({ addExperience, history }) => {
   const [FormData, setFormData] = useState({
     company: "",
     title: "",
@@ -30,7 +30,13 @@ const AddExperience = (props) => {
         positions that you have had in the past
       </p>
       <small>* = required field</small>
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addExperience(FormData, history);
+        }}
+      >
         <div className="form-group">
           <input
             type="text"
@@ -62,7 +68,12 @@ const AddExperience = (props) => {
         </div>
         <div className="form-group">
           <h4>From Date</h4>
-          <input type="date" name="from" />
+          <input
+            type="date"
+            name="from"
+            value={from}
+            onChange={(e) => onChange(e)}
+          />
         </div>
         <div className="form-group">
           <p>
