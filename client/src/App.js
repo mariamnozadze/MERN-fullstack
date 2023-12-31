@@ -12,6 +12,7 @@ import setAuthToken from "./utils/setAuthToken";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-form/CreateProfile";
 import EditProfile from "./components/profile-form/EditProfile";
+import AddExperience from "./components/profile-form/AddExperience";
 
 // Redux
 import { Provider } from "react-redux";
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-profile" element={<CreateProfile/>} />
             <Route path="/edit-profile" element={<EditProfile/>} />
+            <Route path="/add-experience" element={<AddExperience/>} />
           </Routes>
           <Alert />
         </Fragment>
