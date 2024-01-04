@@ -4,7 +4,7 @@ import Moment from "react-moment";
 
 const Experience = ({ experience }) => {
   const experiences = experience.map((exp) => (
-    <td key={exp._id}>
+    <tr key={exp._id}>
       <td>{exp.company}</td>
       <td className="hide-sm">{exp.title}</td>
       <td>
@@ -15,7 +15,10 @@ const Experience = ({ experience }) => {
           <Moment format="YYYY/MM/DD">{exp.from}</Moment>
         )}
       </td>
-    </td>
+      <td>
+        <button className="btn btn-danger">Delete</button>
+      </td>
+    </tr>
   ));
   return (
     <Fragment>
@@ -35,6 +38,8 @@ const Experience = ({ experience }) => {
   );
 };
 
-Experience.propTypes = {};
+Experience.propTypes = {
+    experience: PropTypes.array.isRequired
+};
 
 export default Experience;
