@@ -288,13 +288,13 @@ form .form-group .social-input i {
   color: #0077b5;
 }
 
-.table th,
-.table td {
+table th,
+table td {
   padding: 1rem;
   text-align: left;
 }
 
-.table th {
+table th {
   background: var(--light-color);
 }
 
