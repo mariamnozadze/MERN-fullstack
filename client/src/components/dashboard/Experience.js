@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import { deleteExperience } from "../../actions/profile";
 import { connect } from "react-redux";
+import { deleteExperience } from "../../actions/profile";
 
 const Experience = ({ experience, deleteExperience }) => {
   const experiences = experience.map((exp) => (
