@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import { getProfiles } from "../../actions/profile";
 import { connect } from "react-redux";
-import profile from "../../reducers/profile";
 import ProfileItem from "./ProfileItem";
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
   return (
     <Fragment>
       {loading ? (
